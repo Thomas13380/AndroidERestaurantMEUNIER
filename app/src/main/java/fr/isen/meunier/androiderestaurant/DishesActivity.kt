@@ -43,7 +43,6 @@ class DishesActivity : AppCompatActivity(){
                 val dishresult = gson.fromJson(response.toString(), DishResult::class.java)
 
                 displayDishes(dishresult.data.firstOrNull(){it.name_fr==category}?.items ?: listOf())
-
             }, {
                 Log.e("DishActivity", "Erreur lors de la récupération de la liste des plats")
             })
