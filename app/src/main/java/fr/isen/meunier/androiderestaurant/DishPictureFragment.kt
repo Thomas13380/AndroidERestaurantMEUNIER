@@ -36,6 +36,7 @@ class DishPictureFragment : Fragment() {
         }
 
     }
+
     companion object{
         fun newInstance(pictureUrl: String) =
             DishPictureFragment().apply {

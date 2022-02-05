@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".DishesActivity">
+    tools:context=".BasketActivity">
 
     <TextView
-        android:id="@+id/dishesTitle"
+        android:id="@+id/basketTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -22,7 +21,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/dishes_item"
+        android:id="@+id/basket_item"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -30,7 +29,16 @@
         android:backgroundTint="#D3D3D3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dishesTitle"
-        tools:listitem="@layout/card_view_design" />
+        app:layout_constraintTop_toBottomOf="@+id/basketTitle"
+        tools:listitem="@layout/view_basket" />
 
+    <Button
+        android:id="@+id/button_connection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Connection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/basket_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

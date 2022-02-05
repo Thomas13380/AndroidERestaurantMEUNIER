@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
@@ -28,6 +29,11 @@ class DishesActivity : AppCompatActivity(){
         if (categoryType != null) {
             loadDishesFromCategory(categoryType)
         }
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
     }
 
     private fun loadDishesFromCategory(category: String) {
@@ -66,12 +72,11 @@ class DishesActivity : AppCompatActivity(){
         recyclerview.layoutManager = LinearLayoutManager(this)
 
         binding.dishesItem.layoutManager = LinearLayoutManager(this)
-        binding.dishesItem.adapter = DishAdapter(dishresult, ){
+        binding.dishesItem.adapter = DishAdapter(dishresult, ) {
 
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("dish", it)
             startActivity(intent)
         }
-
     }
 }
