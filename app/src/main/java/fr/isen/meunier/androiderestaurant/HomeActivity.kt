@@ -6,11 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.widget.Button
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.isen.meunier.androiderestaurant.databinding.ActivityHomeBinding
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : ToolActivity(){
     private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,11 +33,6 @@ class HomeActivity : AppCompatActivity() {
             changeActivity(getString(R.string.home_deserts))
         }
 
-    }
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
     }
 
     private fun changeActivity(category:String) {

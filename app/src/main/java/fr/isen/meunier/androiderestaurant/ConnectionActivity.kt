@@ -1,29 +1,44 @@
 package fr.isen.meunier.androiderestaurant
 
-import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
+import android.util.Log
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
+import com.android.volley.DefaultRetryPolicy
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import fr.isen.meunier.androiderestaurant.databinding.ActivityConnectionBinding
+import org.json.JSONObject
 
 class ConnectionActivity : AppCompatActivity() {
-    private lateinit var viewPager: ViewPager2
     private lateinit var binding: ActivityConnectionBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityConnectionBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        viewPager = binding.pager
+
+
         val buttonLogin = binding.buttonLogin
         val buttonRegister = binding.buttonRegister
-        val pagerAdapter = ConnectionAdapter(this)
-        viewPager.adapter = pagerAdapter
+        val fragmentManager: FragmentManager = supportFragmentManager
+        var fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment, LoginFragment()).commit()
+
+        buttonLogin.setOnClickListener {
+            fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment, LoginFragment()).commit()
+        }
+        buttonRegister.setOnClickListener {
+            fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.fragment, RegisterFragment()).commit()
+        }
+
+
 
     }
+
 }

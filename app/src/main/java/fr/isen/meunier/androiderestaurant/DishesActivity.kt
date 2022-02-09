@@ -16,7 +16,7 @@ import fr.isen.meunier.androiderestaurant.model.DishResult
 import org.json.JSONObject
 import fr.isen.meunier.androiderestaurant.model.DishModel
 
-class DishesActivity : AppCompatActivity(){
+class DishesActivity : ToolActivity(){
     private lateinit var binding: ActivityDishesBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +29,8 @@ class DishesActivity : AppCompatActivity(){
         if (categoryType != null) {
             loadDishesFromCategory(categoryType)
         }
-    }
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
-        menuInflater.inflate(R.menu.menu, menu)
-        return true
     }
-
     private fun loadDishesFromCategory(category: String) {
         val queue = Volley.newRequestQueue(this)
         val url = "http://test.api.catering.bluecodegames.com/menu"
@@ -79,4 +74,5 @@ class DishesActivity : AppCompatActivity(){
             startActivity(intent)
         }
     }
+
 }
