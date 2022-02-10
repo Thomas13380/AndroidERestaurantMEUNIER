@@ -37,7 +37,6 @@ class LoginFragment : Fragment() {
         var buttonValidate = binding.buttonValidate
         buttonValidate.setOnClickListener(){
             Login()
-            startActivity(Intent(requireContext(), BasketActivity::class.java))
         }
     }
     private fun Login() {
@@ -59,7 +58,7 @@ class LoginFragment : Fragment() {
         else binding.password.error = null
         if (errorBool) {
             val queue = Volley.newRequestQueue(requireContext())
-            val url = "http://test.api.catering.bluecodegames.com/user/Login"
+            val url = "http://test.api.catering.bluecodegames.com/user/login"
             val jsonObject = JSONObject(params as HashMap<*, *>)
             val request = JsonObjectRequest(
                 Request.Method.POST, url, jsonObject,
@@ -68,15 +67,15 @@ class LoginFragment : Fragment() {
                         GsonBuilder().create()
                             .fromJson(response.toString(), RegisterModel::class.java)
                     val editor =
-                        ConnectionActivity().getSharedPreferences(
+                        requireContext().getSharedPreferences(
                             DetailActivity.APP_PREFS,
                             Context.MODE_PRIVATE
                         ).edit()
                     editor.putString(USER_ID, register.data.userId)
                     editor.apply()
-                    Log.e("response", response.toString())
+                    startActivity(Intent(requireContext(), BasketActivity::class.java))
                 }, {
-                    Log.e("API", it.toString())
+                    Log.d("Login", "error ${it}")
                 })
             request.retryPolicy = DefaultRetryPolicy(
                 DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,

@@ -118,6 +118,7 @@ class DetailActivity : ToolActivity() {
                 editor.putInt(basketCount, 1)
                 editor.apply()
             }
+            startActivity(Intent(this,HomeActivity::class.java))
         }
     }
 

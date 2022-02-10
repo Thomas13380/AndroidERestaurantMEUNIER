@@ -86,6 +86,7 @@ class BasketActivity : ToolActivity() {
             getSharedPreferences(DetailActivity.APP_PREFS, MODE_PRIVATE).contains(USER_ID)
         if (userIdSave) {
             binding.buttonConnection.text = "Commander"
+            Log.e("","")
         }
     }
 }

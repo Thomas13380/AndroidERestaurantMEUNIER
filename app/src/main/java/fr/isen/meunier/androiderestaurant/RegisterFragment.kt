@@ -86,7 +86,7 @@ class RegisterFragment : Fragment() {
                         GsonBuilder().create()
                             .fromJson(response.toString(), RegisterModel::class.java)
                     val editor =
-                        ConnectionActivity().getSharedPreferences(
+                        requireContext().getSharedPreferences(
                             DetailActivity.APP_PREFS,
                             Context.MODE_PRIVATE
                         ).edit()

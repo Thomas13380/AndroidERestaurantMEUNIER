@@ -22,38 +22,40 @@ class OrderActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
         val filename = "/panier.json"
-        if (File(cacheDir.absolutePath + filename).exists() || File(cacheDir.absolutePath + filename).readText()
-                .isNotEmpty()
-        ) {
-            val jsonData = JSONObject()
-            jsonData.put("msg",File(cacheDir.absolutePath + filename).readText())
-            jsonData.put("id_shop", "1")
-            jsonData.put(
-                "id_user",
-                getSharedPreferences(
-                    DetailActivity.APP_PREFS,
-                    MODE_PRIVATE
-                ).getString(LoginFragment.USER_ID, "")
-            )
+        if (File(cacheDir.absolutePath + filename).exists()) {
+            if (File(cacheDir.absolutePath + filename).readText()
+                    .isNotEmpty()
+            ) {
+                val jsonData = JSONObject()
+                jsonData.put("msg", File(cacheDir.absolutePath + filename).readText())
+                jsonData.put("id_shop", "1")
+                jsonData.put(
+                    "id_user",
+                    getSharedPreferences(
+                        DetailActivity.APP_PREFS,
+                        MODE_PRIVATE
+                    ).getString(LoginFragment.USER_ID, "")
+                )
 
-            val queue = Volley.newRequestQueue(this)
-            val url = "http://test.api.catering.bluecodegames.com/user/order"
-            val jsonObject = jsonData
-            val request = JsonObjectRequest(
-                Request.Method.POST, url, jsonObject,
-                { response ->
-                    displayPage(false)
+                val queue = Volley.newRequestQueue(this)
+                val url = "http://test.api.catering.bluecodegames.com/user/order"
+                val jsonObject = jsonData
+                val request = JsonObjectRequest(
+                    Request.Method.POST, url, jsonObject,
+                    { response ->
+                        displayPage(false)
 
-                }, {
-                    displayPage(true)
-                })
-            request.retryPolicy = DefaultRetryPolicy(
-                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
+                    }, {
+                        displayPage(true)
+                    })
+                request.retryPolicy = DefaultRetryPolicy(
+                    DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
 
-                0,
-                1f
-            )
-            queue.add(request)
+                    0,
+                    1f
+                )
+                queue.add(request)
+            } else displayPage(true)
         }
         else displayPage(true)
     }
