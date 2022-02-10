@@ -11,7 +11,7 @@ import fr.isen.meunier.androiderestaurant.model.DishModel
 class DishAdapter(val dishes: List<DishModel>, val onDishClicked: (DishModel) -> Unit) : RecyclerView.Adapter<DishAdapter.DishViewHolder>() {
 
     class DishViewHolder(val binding: CardViewDesignBinding): RecyclerView.ViewHolder(binding.root){
-        val dishPicture = binding.dishPicture
+        val dishPicture = binding.dishImage
         val dishName = binding.dishName
         val dishPrice = binding.dishPrice
     }

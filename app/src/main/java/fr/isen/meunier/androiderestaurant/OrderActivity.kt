@@ -2,7 +2,6 @@ package fr.isen.meunier.androiderestaurant
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import com.android.volley.DefaultRetryPolicy
@@ -10,7 +9,9 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import fr.isen.meunier.androiderestaurant.databinding.ActivityOrderBinding
+import fr.isen.meunier.androiderestaurant.model.DishBasket
 import org.json.JSONObject
 import java.io.File
 
@@ -27,7 +28,9 @@ class OrderActivity : AppCompatActivity() {
                     .isNotEmpty()
             ) {
                 val jsonData = JSONObject()
-                jsonData.put("msg", File(cacheDir.absolutePath + filename).readText())
+                val recup = File(cacheDir.absolutePath + filename).readText()
+                val resultat = Gson().fromJson(recup, DishBasket::class.java)
+                jsonData.put("msg", recup)
                 jsonData.put("id_shop", "1")
                 jsonData.put(
                     "id_user",
@@ -42,8 +45,9 @@ class OrderActivity : AppCompatActivity() {
                 val jsonObject = jsonData
                 val request = JsonObjectRequest(
                     Request.Method.POST, url, jsonObject,
-                    { response ->
-                        displayPage(false)
+                    {
+                        if (resultat.quantity==0) displayPage(true)
+                        else displayPage(false)
 
                     }, {
                         displayPage(true)
@@ -65,15 +69,15 @@ class OrderActivity : AppCompatActivity() {
             binding.deliveryText.isVisible = false
             binding.errorText.isVisible = true
         } else {
-            showGif(binding.root)
+            showGif()
             binding.warning.isVisible = false
             binding.deliveryText.isVisible = true
             binding.errorText.isVisible = false
         }
     }
 
-    private fun showGif(view: View) {
-        val imageView: ImageView = findViewById(R.id.delivery_gif)
+    private fun showGif() {
+        val imageView: ImageView = findViewById(R.id.deliveryGif)
         Glide.with(this).load(R.drawable.delivery).into(imageView)
     }
 

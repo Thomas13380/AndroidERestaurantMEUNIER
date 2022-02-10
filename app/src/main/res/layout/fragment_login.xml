@@ -18,7 +18,7 @@
         android:hint="Adresse e-mail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_title">
+        app:layout_constraintTop_toBottomOf="@+id/registerTitle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailInput"
@@ -48,7 +48,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/register_title"
+        android:id="@+id/registerTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -62,7 +62,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_validate"
+        android:id="@+id/buttonValidate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"

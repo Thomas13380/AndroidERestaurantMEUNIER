@@ -3,10 +3,8 @@ package fr.isen.meunier.androiderestaurant
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -14,7 +12,6 @@ import fr.isen.meunier.androiderestaurant.RegisterFragment.Companion.USER_ID
 import fr.isen.meunier.androiderestaurant.databinding.ActivityBasketBinding
 import fr.isen.meunier.androiderestaurant.model.BasketData
 import fr.isen.meunier.androiderestaurant.model.DishBasket
-import fr.isen.meunier.androiderestaurant.model.DishModel
 import java.io.File
 
 
@@ -37,7 +34,7 @@ class BasketActivity : ToolActivity() {
             Log.d("panier", recup)
             val data = ArrayList<BasketData>()
             for (j in resultat.dishName.indices) {
-                data.add(BasketData(resultat.dishName[j].DishName, resultat.dishName[j].quantity))
+                data.add(BasketData(resultat.dishName[j].dishName, resultat.dishName[j].quantity))
             }
 
             displayDishes(DishBasket(data, resultat.quantity))
@@ -86,7 +83,6 @@ class BasketActivity : ToolActivity() {
             getSharedPreferences(DetailActivity.APP_PREFS, MODE_PRIVATE).contains(USER_ID)
         if (userIdSave) {
             binding.buttonConnection.text = "Commander"
-            Log.e("","")
         }
     }
 }
