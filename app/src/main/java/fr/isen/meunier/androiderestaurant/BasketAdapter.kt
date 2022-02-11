@@ -8,13 +8,13 @@ import fr.isen.meunier.androiderestaurant.databinding.ViewBasketBinding
 import fr.isen.meunier.androiderestaurant.model.BasketData
 
 
-class BasketAdapter(private val dishes: MutableList<BasketData>,val onBeenClicked: (BasketData) -> Unit) : RecyclerView.Adapter<BasketAdapter.BasketViewHolder>() {
+class BasketAdapter(private val dishes: MutableList<BasketData>,val onBinClicked: (BasketData) -> Unit) : RecyclerView.Adapter<BasketAdapter.BasketViewHolder>() {
 
     class BasketViewHolder(private val binding: ViewBasketBinding): RecyclerView.ViewHolder(binding.root){
         val dishPicture = binding.dishImage
         val dishName = binding.dishName
         val dishQuantity = binding.quantity
-        val deleteItem = binding.been
+        val deleteItem = binding.bin
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketViewHolder {
@@ -36,7 +36,7 @@ class BasketAdapter(private val dishes: MutableList<BasketData>,val onBeenClicke
         holder.deleteItem.setOnClickListener {
             if(position < dishes.size) {
                 val elementToRemove = dishes[position]
-                onBeenClicked.invoke(elementToRemove)
+                onBinClicked.invoke(elementToRemove)
                 dishes.remove(elementToRemove)
                 notifyDataSetChanged()
             }

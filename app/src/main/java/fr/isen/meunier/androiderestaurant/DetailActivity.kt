@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import fr.isen.meunier.androiderestaurant.databinding.ActivityDetailBinding
@@ -64,13 +65,13 @@ class DetailActivity : ToolActivity() {
                 Snackbar.make(it, "Ajouté au panier", Snackbar.LENGTH_LONG).show()
                 if (File(cacheDir.absolutePath + filename).readText().isNotEmpty()) {
                     val recup = File(cacheDir.absolutePath + filename).readText();
-                    val resultat = Gson().fromJson(recup, DishBasket::class.java)
-                    basketNumberOfElement = resultat.quantity
-                    for (j in resultat.dishName.indices) {
+                    val result = Gson().fromJson(recup, DishBasket::class.java)
+                    basketNumberOfElement = result.quantity
+                    for (j in result.dishName.indices) {
                         BasketAdd(
                             BasketData(
-                                resultat.dishName[j].dishName,
-                                resultat.dishName[j].quantity
+                                result.dishName[j].dishName,
+                                result.dishName[j].quantity
                             ), data
                         )
                     }

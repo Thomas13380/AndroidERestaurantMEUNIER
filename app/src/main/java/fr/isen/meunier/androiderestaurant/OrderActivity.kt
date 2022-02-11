@@ -29,7 +29,7 @@ class OrderActivity : AppCompatActivity() {
             ) {
                 val jsonData = JSONObject()
                 val recup = File(cacheDir.absolutePath + filename).readText()
-                val resultat = Gson().fromJson(recup, DishBasket::class.java)
+                val result = Gson().fromJson(recup, DishBasket::class.java)
                 jsonData.put("msg", recup)
                 jsonData.put("id_shop", "1")
                 jsonData.put(
@@ -46,7 +46,7 @@ class OrderActivity : AppCompatActivity() {
                 val request = JsonObjectRequest(
                     Request.Method.POST, url, jsonObject,
                     {
-                        if (resultat.quantity==0) displayPage(true)
+                        if (result.quantity==0) displayPage(true)
                         else displayPage(false)
 
                     }, {
